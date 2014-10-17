@@ -21,12 +21,19 @@ $(document).ready(function() {
 
         var postnummer = $(this).find( "input[name='postnummer']" ).val();
         var kode = $(this).find( "input[name='kode']" ).val();
+        var position = getCurrentPosition();
+        console.log(position);
         console.log(postnummer);
         var data = JSON.stringify(
             {
                 Kode: kode,
                 Postnummer: postnummer,
-                LagId: "4c97faa" 
+                LagId: "4c97faa",
+                Koordinat : 
+                {
+                    Longitude : 30,
+                    Latitude :3
+                }
             });
         
         console.log(data);
@@ -65,6 +72,14 @@ function setCurrentPosition(map) {
         navigator.geolocation.getCurrentPosition(function (position) {
             initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
             map.setCenter(initialLocation);
+        });
+    }
+}
+
+function getCurrentPosition() {
+    if(navigator.geolocation) {
+        return navigator.geolocation.getCurrentPosition(function(position) {
+            return position;
         });
     }
 }
