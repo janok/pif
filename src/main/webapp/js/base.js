@@ -32,31 +32,39 @@ $(document).ready(function() {
 
         var postnummer = $(this).find( "input[name='postnummer']" ).val();
         var kode = $(this).find( "input[name='kode']" ).val();
-        var position = getCurrentPosition();
-        console.log(position);
+        //var position = getCurrentPosition();
+        //console.log(position);
         console.log(postnummer);
-        var data = JSON.stringify(
-            {
-                Kode: kode,
-                Postnummer: postnummer,
-                LagId: "4c97faa",
-                Koordinat : 
-                {
-                    Longitude : 30,
-                    Latitude :3
-                },
-                LagId: "4c97faa"
+        console.log(kode);
+        if(navigator.geolocation) {
+            console.log('yes');
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log('hihihi');
+                var data = JSON.stringify(
+                    {
+                        Kode: kode,
+                        Postnummer: postnummer,
+                        LagId: "4c97faa",
+                        Koordinat : 
+                        {
+                            Longitude : (position.coords.longitude).toString(),
+                            Latitude : (position.coords.latitude).toString(),
+                            X : 0,
+                            Y : 0
+                        },
+                        LagId: "4c97faa"
+                    });
+                
+                console.log(data);
+                sendPostKode(event, data);
             });
-
-        console.log(data);
-        sendPostKode(event, data);
+        }
     });
 });
 
 function sendPifPosition(event, data){
+    event.preventDefault();
     console.log("hello world");
-
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var postPosition = data;
@@ -73,9 +81,9 @@ function sendPifPosition(event, data){
             
             
             $.ajax({
-                url : "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpifposisjon?api_key=8-55",
+                url : "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpifposisjon",
                 type : 'POST',
-                contentType:"application/json; charset=utf-8",
+                
                 data :  data
                 
             });
@@ -91,6 +99,7 @@ function sendPostKode(event, data) {
     $.ajax({
         url :  "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpostkode",
         type : 'POST',
+        contentType:"application/json; charset=utf-8",
         data : postData
 
     });

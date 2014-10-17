@@ -3,7 +3,7 @@
   <head>
     <style type="text/css">
       html, body, 
-      #map-canvas { height: 90%; margin: 0; padding: 0;}
+      #map-canvas { height: 800px; width: 800px;  margin: 0; padding: 0;}
       
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -24,7 +24,7 @@
   </head>
   <body>
 
-    <div id="map-canvas"></div>
+   
 
     <p class="infisert">Infisert: </p>
 
@@ -52,6 +52,8 @@
     <% } %>
 
 </table>
+
+ <div id="map-canvas"></div>
 
   </body>
 </html>
