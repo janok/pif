@@ -23,9 +23,32 @@
     
   </head>
   <body>
+
     <div id="map-canvas"></div>
   
- 
-   Send postkode: 
+    <div>
+      <form action="#" id="postKodeForm">
+      Send postkode:
+      <input type="text" name="kode" placeholder="Kode"/>
+      <input type="text" name="postnummer" placeholder="Postnummer"/>
+      <input type="submit" value="Send inn"/>
+      </form>
+   </div> 
+  
+
+
+<table width="100%">
+
+    <% for (int i = 0; i < 100; i++) { %>
+    <tr>
+        <td class="type<%=i%>"></td>
+        <td class="innhold<%=i%>"></td>
+        <td class="lagId<%=i%>"></td>
+        <td class="tid<%=i%>"></td>
+    </tr>
+    <% } %>
+
+</table>
+
   </body>
 </html>

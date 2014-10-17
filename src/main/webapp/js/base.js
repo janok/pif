@@ -5,13 +5,45 @@ $(document).ready(function() {
     $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/4c97faa"
     }).then(function(data) {
-        $('.navn').append(data.navn);
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            $('.type' + i).append(data[i].type);
+            $('.innhold' + i).append(data[i].innhold);
+            $('.lagId' + i).append(data[i].lagId);
+            $('.tid' + i).append(data[i].tid);
+        }
     });
     var map = initializeMap();
     setMyPositionMarker(map);
+
+    $("#postKodeForm").submit(function(event) {
+
+        var postnummer = $(this).find( "input[name='postnummer']" ).val();
+        var kode = $(this).find( "input[name='kode']" ).val();
+        console.log(postnummer);
+        var data = JSON.stringify(
+            {
+                Kode: kode,
+                Postnummer: postnummer,
+                LagId: "4c97faa" 
+            });
+        
+        console.log(data);
+        sendPostKode(event, data);       
+    });
 });
 
-function sendPostKode() {
+function sendPostKode(event, data) {
+    event.preventDefault();
+    
+    console.log(data);
+    var postData = data;
+    $.ajax({
+        url :  "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpostkode",
+        type : 'POST',
+        data : postData
+        
+    });
     
 }
 
