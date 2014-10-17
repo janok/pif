@@ -3,7 +3,7 @@
  */
 $(document).ready(function() {
             var callAjax = function(){
-                sendPifPosition(0,0);
+                sendPifPosition(0,0);8
             }
     setInterval(callAjax,5000);
 });
