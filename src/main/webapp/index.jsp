@@ -23,6 +23,9 @@
     
   </head>
   <body>
-<div id="map-canvas"></div>
+    <div id="map-canvas"></div>
+  
+ 
+   Send postkode: 
   </body>
 </html>
