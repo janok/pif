@@ -5,12 +5,13 @@ $(document).ready(function() {
     $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/4c97faa"
     }).then(function(data) {
+        var length = data.length;
         for (var i = 0; i < data.length; i++) {
-            console.log(data[i]);
-            $('.type' + i).append(data[i].type);
-            $('.innhold' + i).append(data[i].innhold);
-            $('.lagId' + i).append(data[i].lagId);
-            $('.tid' + i).append(data[i].tid);
+            console.log(length - i + " - " + data[i].innhold);
+            $('.type' + (length - i)).append(data[i].type);
+            $('.innhold' + (length - i)).append(data[i].innhold);
+            $('.lagId' + (length - i)).append(data[i].lagId);
+            $('.tid' + (length - i)).append(data[i].tid);
         }
     });
     var map = initializeMap();
