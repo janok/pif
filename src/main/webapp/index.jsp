@@ -25,7 +25,9 @@
   <body>
 
     <div id="map-canvas"></div>
-  
+
+    <p class="infisert">Infisert: </p>
+
     <div>
       <form action="#" id="postKodeForm">
       Send postkode:
@@ -36,7 +38,7 @@
    </div> 
     
   
-
+<a onclick="sendPifPosition()" href="#">
 
 <table width="100%">
 

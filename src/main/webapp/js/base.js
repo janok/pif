@@ -3,6 +3,17 @@
  */
 $(document).ready(function() {
     $.ajax({
+        url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/erinfisert/4c97faa"
+    }).then(function(data) {
+        console.log(data);
+        if (data) {
+            $('.infisert').append('TRUE');
+        } else {
+            $('.infisert').append('FALSE');
+        }
+    });
+
+    $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/4c97faa"
     }).then(function(data) {
         var length = data.length;
@@ -33,30 +44,61 @@ $(document).ready(function() {
                 {
                     Longitude : 30,
                     Latitude :3
-                }
+                },
+                LagId: "4c97faa"
             });
-        
+
         console.log(data);
-        sendPostKode(event, data);       
+        sendPostKode(event, data);
     });
 });
 
+function sendPifPosition(event, data){
+    console.log("hello world");
+
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var postPosition = data;
+            var data = JSON.stringify(
+                {
+                 Posisjon : {
+                     Longitude: (position.coords.longitude).toString(),
+                     Latitude: (position.coords.latitude).toString(),
+                     X : 0,
+                     Y : 0
+                 },
+                    LagId : "4c97faa"
+                });
+            
+            
+            $.ajax({
+                url : "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpifposisjon?api_key=8-55",
+                type : 'POST',
+                contentType:"application/json; charset=utf-8",
+                data :  data
+                
+            });
+        });
+    }
+}
+
 function sendPostKode(event, data) {
     event.preventDefault();
-    
+
     console.log(data);
     var postData = data;
     $.ajax({
         url :  "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpostkode",
         type : 'POST',
         data : postData
-        
+
     });
-    
+
 }
 
 function initializeMap() {
-    
+
     var mapOptions = {
         center: { lat: 60, lng: 9},
         zoom: 16
@@ -85,7 +127,7 @@ function getCurrentPosition() {
 }
 
 function setMyPositionMarker(map) {
-   
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -94,12 +136,12 @@ function setMyPositionMarker(map) {
                 title:"Kor i svartre er eg?"
             });
 
-            
+
             marker.setMap(map);
             map.setCenter(myLocation);
         });
     }
-    
+
 }
 
 
