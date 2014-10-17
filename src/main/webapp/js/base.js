@@ -42,6 +42,10 @@ $(document).ready(function() {
         //console.log(position);
         console.log(postnummer);
         console.log(kode);
+
+       
+
+
         if(navigator.geolocation) {
             console.log('yes');
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -50,7 +54,6 @@ $(document).ready(function() {
                     {
                         Kode: kode,
                         Postnummer: postnummer,
-                        LagId: "4c97faa",
                         Koordinat : 
                         {
                             Longitude : (position.coords.longitude).toString(),
@@ -63,13 +66,16 @@ $(document).ready(function() {
                 
                 console.log(data);
                 sendPostKode(event, data);
+                return false;
             });
         }
+         event.preventDefault();
     });
+    return false;
 });
 
 function sendPifPosition(event, data){
-    event.preventDefault();
+    //event.preventDefault();
     console.log("hello world");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
