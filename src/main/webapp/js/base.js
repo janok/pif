@@ -3,9 +3,15 @@
  */
 $(document).ready(function() {
     $.ajax({
-        url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/55"
+        url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/4c97faa"
     }).then(function(data) {
-        $('.navn').append(data.navn);
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+            $('.type' + i).append(data[i].type);
+            $('.innhold' + i).append(data[i].innhold);
+            $('.lagId' + i).append(data[i].lagId);
+            $('.tid' + i).append(data[i].tid);
+        }
     });
     var map = initializeMap();
     setMyPositionMarker(map);
