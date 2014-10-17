@@ -37,7 +37,7 @@
       </form>
    </div> 
   
-
+<a onclick="sendPifPosition()" href="#">
 
 <table width="100%">
 
