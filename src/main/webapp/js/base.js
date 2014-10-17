@@ -3,6 +3,17 @@
  */
 $(document).ready(function() {
     $.ajax({
+        url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/erinfisert/4c97faa"
+    }).then(function(data) {
+        console.log(data);
+        if (data) {
+            $('.infisert').append('TRUE');
+        } else {
+            $('.infisert').append('FALSE');
+        }
+    });
+
+    $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/hentmeldinger/4c97faa"
     }).then(function(data) {
         var length = data.length;
