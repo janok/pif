@@ -2,6 +2,12 @@
  *
  */
 $(document).ready(function() {
+            var callAjax = function(){
+                sendPifPosition(0,0);
+            }
+    setInterval(callAjax,5000);
+});
+$(document).ready(function() {
     $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/erinfisert/4c97faa"
     }).then(function(data) {
