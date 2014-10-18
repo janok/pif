@@ -5,13 +5,13 @@ $(document).ready(function() {
             var callAjax = function(){
                 sendPifPosition(0,0);8
             }
-    setInterval(callAjax,5000);
+    setInterval(callAjax,10000);
 });
 $(document).ready(function() {
     $.ajax({
         url: "http://bouvet-code-camp.azurewebsites.net/api/game/pif/erinfisert/4c97faa"
     }).then(function(data) {
-        console.log(data);
+        
         if (data) {
             $('.infisert').append('TRUE');
         } else {
@@ -24,7 +24,7 @@ $(document).ready(function() {
     }).then(function(data) {
         var length = data.length;
         for (var i = 0; i < data.length; i++) {
-            console.log(length - i + " - " + data[i].innhold);
+            
             $('.type' + (length - i)).append(data[i].type);
             $('.innhold' + (length - i)).append(data[i].innhold);
             $('.lagId' + (length - i)).append(data[i].lagId);
@@ -39,17 +39,12 @@ $(document).ready(function() {
         var postnummer = $(this).find( "input[name='postnummer']" ).val();
         var kode = $(this).find( "input[name='kode']" ).val();
         //var position = getCurrentPosition();
-        //console.log(position);
-        console.log(postnummer);
-        console.log(kode);
-
-       
-
-
+      
+      
         if(navigator.geolocation) {
-            console.log('yes');
+            
             navigator.geolocation.getCurrentPosition(function(position) {
-                console.log('hihihi');
+            
                 var data = JSON.stringify(
                     {
                         Kode: kode,
@@ -64,7 +59,7 @@ $(document).ready(function() {
                         LagId: "4c97faa"
                     });
                 
-                console.log(data);
+                
                 sendPostKode(event, data);
                 return false;
             });
@@ -76,7 +71,7 @@ $(document).ready(function() {
 
 function sendPifPosition(event, data){
    
-    console.log("hello world");
+    
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             var postPosition = data;
@@ -115,7 +110,7 @@ function sendPostKode(event, data) {
             alert('yes');
         },
         error : function(response) {
-            alert('did not work');
+            alert('did not work ' +response.status);
         }
     });
 
