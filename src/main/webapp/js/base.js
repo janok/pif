@@ -75,7 +75,7 @@ $(document).ready(function() {
 });
 
 function sendPifPosition(event, data){
-    //event.preventDefault();
+   
     console.log("hello world");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -95,7 +95,7 @@ function sendPifPosition(event, data){
             $.ajax({
                 url : "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpifposisjon",
                 type : 'POST',
-                
+                contentType:"application/json; charset=utf-8",
                 data :  data
                 
             });
@@ -105,15 +105,18 @@ function sendPifPosition(event, data){
 
 function sendPostKode(event, data) {
     event.preventDefault();
-
-    console.log(data);
     var postData = data;
     $.ajax({
         url :  "http://bouvet-code-camp.azurewebsites.net/api/game/pif/sendpostkode",
         type : 'POST',
         contentType:"application/json; charset=utf-8",
-        data : postData
-
+        data : postData,
+        success : function(response) {
+            alert('yes');
+        },
+        error : function(response) {
+            alert('did not work');
+        }
     });
 
 }
